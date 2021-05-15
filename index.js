@@ -1,5 +1,6 @@
 //dependencias
 const express = require('express');
+const {nanoid} = require('nanoid');
 //init
 const app = express();
 //middleware, 
@@ -21,10 +22,18 @@ app.get('/api/users', (req, res) => {
   ];
   res.status(200).json({ success: true, data: users });
 });
-
 app.post('/api/users', (req, res) => {
   console.log(req.body);
-  const user = req.body;
+  //validation
+  const { name, email } = req.body;
+  if(!name || !email){
+    res.status(500).json({ success: false, message: 'validation error'})
+  }
+  const user = {
+    id : nanoid(),
+    name : name,
+    email : email
+  };
   res.status(200).json({ success: true, message: 'user created', data: user });
 });
 app.listen(PORT, () => {
