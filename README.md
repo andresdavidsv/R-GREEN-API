@@ -62,7 +62,7 @@ PUT USER http://localhost:3001/api/v1/users/:id
 }
 ```
 
-PUT USER http://localhost:3001/api/v1/users/:id
+DELETE USER http://localhost:3001/api/v1/users/:id
 
 ```
 {
@@ -70,6 +70,10 @@ PUT USER http://localhost:3001/api/v1/users/:id
   "message": "user deleted"
 }
 ```
+
+## Deploy
+
+URL => https://r-green-api.vercel.app/
 
 ## Dependences Instaled
 
@@ -80,7 +84,14 @@ PUT USER http://localhost:3001/api/v1/users/:id
 - Boom => npm i @hapi/boom
 - Joi => npm i @hapi/joi
 - Cors => npm i cors
+- Deploy => npm i -g vercel
 
 ## Docker Instaled
 - Build => docker build -t r-green-api .
 - Run Image => docker run -p 3001:3001 -d r-green-api
+
+
+##
+End Point - > Company -> mock
+EndPoint -> Requests
+
