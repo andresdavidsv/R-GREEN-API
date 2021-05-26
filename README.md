@@ -2,15 +2,72 @@
 
 ## Endpoints
 
-GET http://localhost:8001/api/users
+GET ALL USERS http://localhost:3001/api/v1/users
 
 ```
 {
   success: true,
   data:[{
-    id:
-    name:
+    first_name: '',
+    last_name: '',
+    user_name: '',
+    email: '',
+    password: '',
   }]
+}
+```
+
+GET USER http://localhost:3001/api/v1/users/:id
+
+```
+{
+  success: true,
+  data:[{
+    first_name: '',
+    last_name: '',
+    user_name: '',
+    email: '',
+    password: '',
+  }]
+}
+```
+
+POST USER http://localhost:3001/api/v1/users/
+
+```
+{
+  success: true,
+  data:[{
+    first_name: '',
+    last_name: '',
+    user_name: '',
+    email: '',
+    password: '',
+  }]
+}
+```
+
+PUT USER http://localhost:3001/api/v1/users/:id
+
+```
+{
+  success: true,
+  data:[{
+    first_name: '',
+    last_name: '',
+    user_name: '',
+    email: '',
+    password: '',
+  }]
+}
+```
+
+PUT USER http://localhost:3001/api/v1/users/:id
+
+```
+{
+  "data": userId,
+  "message": "user deleted"
 }
 ```
 

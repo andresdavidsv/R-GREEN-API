@@ -17,7 +17,7 @@ const {
 
 function usersApi(app) {
   const router = express.Router();
-  app.use('/api/users', router);
+  app.use('/api/v1/users', router);
 
   const usersService = new UsersService();
 
