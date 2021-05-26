@@ -80,3 +80,7 @@ PUT USER http://localhost:3001/api/v1/users/:id
 - Boom => npm i @hapi/boom
 - Joi => npm i @hapi/joi
 - Cors => npm i cors
+
+## Docker Instaled
+- Build => docker build -t r-green-api .
+- Run Image => docker run -p 3001:3001 -d r-green-api
