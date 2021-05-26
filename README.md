@@ -71,6 +71,10 @@ PUT USER http://localhost:3001/api/v1/users/:id
 }
 ```
 
+## Deploy
+
+URL => https://r-green-api.vercel.app/
+
 ## Dependences Instaled
 
 - npm i express dotenv
@@ -80,6 +84,7 @@ PUT USER http://localhost:3001/api/v1/users/:id
 - Boom => npm i @hapi/boom
 - Joi => npm i @hapi/joi
 - Cors => npm i cors
+- Deploy => npm i -g vercel
 
 ## Docker Instaled
 - Build => docker build -t r-green-api .
