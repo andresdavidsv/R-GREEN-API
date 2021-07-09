@@ -1,0 +1,22 @@
+{
+  "name": "rgreenapi",
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.js"
+    }
+  ],
+  "env": {
+    "DB_USER": "@r-green-db-user",
+    "DB_PASSWORD": "@r-green-db-password",
+    "DB_HOST": "@r-green-db-host",
+    "DB_NAME": "@r-green-db-name"
+  }
+}
