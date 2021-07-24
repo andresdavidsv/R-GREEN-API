@@ -1,8 +1,17 @@
 const express = require('express');
+const { ApolloServer } = require('apollo-server');
+
+const typeDefs = require('./db/schema');
+const resolvers = require('./db/resolvers');
+
+//Servers
 const app = express();
+const server = new ApolloServer({ typeDefs, resolvers });
 
 const { config } = require('./config/index');
 const usersApi = require('./routes/users');
+const materialsApi = require('./routes/materials');
+const userMaterialsApi = require('./routes/userMaterials');
 
 //Middleware
 const {
@@ -21,6 +30,8 @@ app.use(corsHandler());
 
 //routes
 usersApi(app);
+materialsApi(app);
+userMaterialsApi(app);
 
 // catch 404 error
 app.use(notFoundHandler);
@@ -35,3 +46,8 @@ app.listen(config.dbPort, function () {
   const debug = require('debug')('app:server');
   debug(`Listening http://localhost:${config.dbPort}`);
 });
+
+server.listen().then(({ url }) => {
+  const debug = require('debug')('app:server');
+  debug(`Apollo listening ${url}`);
+})
