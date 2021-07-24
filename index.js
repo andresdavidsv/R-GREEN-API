@@ -48,5 +48,6 @@ app.listen(config.dbPort, function () {
 });
 
 server.listen().then(({ url }) => {
-  console.log(`Apollo listening ${url}`);
+  const debug = require('debug')('app:server');
+  debug(`Apollo listening ${url}`);
 })

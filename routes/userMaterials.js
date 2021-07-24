@@ -57,7 +57,7 @@ function usersMaterialsApi(app) {
 
         res.status(200).json({
           data: userMaterils,
-          message: 'user materil retrieved',
+          message: 'user material retrieved',
         });
       } catch (err) {
         next(err);
