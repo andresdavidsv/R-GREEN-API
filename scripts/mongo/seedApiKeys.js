@@ -14,6 +14,7 @@ const adminScopes = [
   'delete:materials',
   'read:user-materials',
   'create:user-materials',
+  'update:user-materials',
   'delete:user-materials'
 ];
 

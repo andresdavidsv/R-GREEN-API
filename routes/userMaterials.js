@@ -15,6 +15,7 @@ const {
 } = require('../utils/schemas/userMaterials');
 
 const validationHandler = require('../utils/middleware/validationHandlers');
+const scopesValidationHandler = require('../utils/middleware/scopesValidationHandler');
 
 const cacheResponse = require('../utils/cacheResponse');
 const {
@@ -33,6 +34,7 @@ function usersMaterialsApi(app) {
 
   router.get('/',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['read:user-materials']),
     validationHandler({ userId: userIdSchema }, 'query'),
     async function (req, res, next) {
       cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
@@ -53,6 +55,7 @@ function usersMaterialsApi(app) {
   router.get(
     '/:userMaterialId',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['read:user-materials']),
     validationHandler({ userMaterialId: userMaterialIdSchema }, 'params'),
     async function (req, res, next) {
       cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
@@ -74,6 +77,7 @@ function usersMaterialsApi(app) {
   router.post(
     '/',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['read:user-materials']),
     validationHandler(createUserMaterialSchema),
     async function (req, res, next) {
       const { body: userMaterial } = req;
@@ -93,6 +97,7 @@ function usersMaterialsApi(app) {
   router.put(
     '/:userMaterialId',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['update:user-materials']),
     validationHandler({ userMaterialId: userMaterialIdSchema }, 'params'),
     validationHandler(updateUserMaterialSchema),
     async function (req, res, next) {
@@ -118,6 +123,7 @@ function usersMaterialsApi(app) {
   router.delete(
     '/:userMaterialId',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['delete:user-materials']),
     validationHandler({ userMaterialId: materialIdSchema }, 'params'),
     async function (req, res, next) {
       const { userMaterialId } = req.params;

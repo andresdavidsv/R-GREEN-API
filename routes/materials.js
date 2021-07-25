@@ -9,6 +9,7 @@ const {
 } = require('../utils/schemas/materials');
 
 const validationHandler = require('../utils/middleware/validationHandlers');
+const scopesValidationHandler = require('../utils/middleware/scopesValidationHandler');
 
 const cacheResponse = require('../utils/cacheResponse');
 const {
@@ -27,6 +28,7 @@ function materialsApi(app) {
 
   router.get('/',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['read:materials']),
     async function (req, res, next) {
       cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
       const { tags } = req.query;
@@ -46,6 +48,7 @@ function materialsApi(app) {
   router.get(
     '/:materialId',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['read:materials']),
     validationHandler({ materialId: materialIdSchema }, 'params'),
     async function (req, res, next) {
       cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
@@ -67,6 +70,7 @@ function materialsApi(app) {
   router.post(
     '/',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['create:materials']),
     validationHandler(createMaterialSchema),
     async function (req, res, next) {
       const { body: material } = req;
@@ -86,6 +90,7 @@ function materialsApi(app) {
   router.put(
     '/:materialId',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['update:materials']),
     validationHandler({ materialId: materialIdSchema }, 'params'),
     validationHandler(updateMaterialSchema),
     async function (req, res, next) {
@@ -111,6 +116,7 @@ function materialsApi(app) {
   router.delete(
     '/:materialId',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['delete:materials']),
     validationHandler({ materialId: materialIdSchema }, 'params'),
     async function (req, res, next) {
       const { materialId } = req.params;
