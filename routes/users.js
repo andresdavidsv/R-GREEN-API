@@ -45,7 +45,7 @@ function usersApi(app) {
       const { userId } = req.params;
 
       try {
-        const user = await usersService.getUser({ userId });
+        const user = await usersService.getUserId({ userId });
 
         res.status(200).json({
           data: user,
