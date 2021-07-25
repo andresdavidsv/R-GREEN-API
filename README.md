@@ -85,6 +85,8 @@ URL => https://r-green-api.vercel.app/
 - Joi => npm i @hapi/joi
 - Cors => npm i cors
 - Deploy => npm i -g vercel
+- Passport Js => npm i passport jsonwebtoken passport-http passport-jwt
+- Chalk => npm i -D chalk
 
 ## Docker Instaled
 - Build => docker build -t r-green-api .

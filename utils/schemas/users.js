@@ -6,7 +6,7 @@ const userLastNameSchema = joi.string().min(5).max(15);
 const userUserNameSchema = joi.string().min(3).max(10);
 const userEmailSchema = joi.string().email();
 const userPasswordSchema = joi.string().regex(/^[a-zA-Z0-9]{3,30}$/);
-const userAdminSchema = joi.boolean();
+const userAdminSchema = joi.boolean().default(false);
 
 const createUserSchema = {
   first_name: userFirstNameSchema.required(),
@@ -14,7 +14,7 @@ const createUserSchema = {
   user_name: userUserNameSchema.required(),
   email: userEmailSchema.required(),
   password: userPasswordSchema.required(),
-  isAdmin:userAdminSchema
+  isAdmin: userAdminSchema
 };
 
 const updateUserSchema = {
