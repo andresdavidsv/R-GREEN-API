@@ -9,6 +9,8 @@ const app = express();
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const { config } = require('./config/index');
+
+const authApi = require('./routes/auth');
 const usersApi = require('./routes/users');
 const materialsApi = require('./routes/materials');
 const userMaterialsApi = require('./routes/userMaterials');
@@ -29,6 +31,7 @@ app.use(express.json())
 app.use(corsHandler());
 
 //routes
+authApi(app);
 usersApi(app);
 materialsApi(app);
 userMaterialsApi(app);

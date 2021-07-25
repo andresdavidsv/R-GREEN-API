@@ -14,7 +14,7 @@ const createUserSchema = {
   user_name: userUserNameSchema.required(),
   email: userEmailSchema.required(),
   password: userPasswordSchema.required(),
-  isAdmin:userAdminSchema
+  isAdmin: userAdminSchema
 };
 
 const updateUserSchema = {
