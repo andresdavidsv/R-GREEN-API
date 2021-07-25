@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 const MaterialsService = require('../services/materials');
 
 const {
@@ -15,30 +16,36 @@ const {
   SIXTY_MINUTES_IN_SECONDS,
 } = require('../utils/time');
 
+//JWT strategy
+require('../utils/auth/strategies/jwt');
+
 function materialsApi(app) {
   const router = express.Router();
   app.use('/api/v1/materials', router);
 
   const materialsService = new MaterialsService();
 
-  router.get('/', async function (req, res, next) {
-    cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
-    const { tags } = req.query;
+  router.get('/',
+    passport.authenticate('jwt', { session: false }),
+    async function (req, res, next) {
+      cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
+      const { tags } = req.query;
 
-    try {
-      const materials = await materialsService.materialsService({ tags });
+      try {
+        const materials = await materialsService.materialsService({ tags });
 
-      res.status(200).json({
-        data: materials,
-        message: 'materials listed',
-      });
-    } catch (err) {
-      next(err);
-    }
-  });
+        res.status(200).json({
+          data: materials,
+          message: 'materials listed',
+        });
+      } catch (err) {
+        next(err);
+      }
+    });
 
   router.get(
     '/:materialId',
+    passport.authenticate('jwt', { session: false }),
     validationHandler({ materialId: materialIdSchema }, 'params'),
     async function (req, res, next) {
       cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
@@ -59,6 +66,7 @@ function materialsApi(app) {
 
   router.post(
     '/',
+    passport.authenticate('jwt', { session: false }),
     validationHandler(createMaterialSchema),
     async function (req, res, next) {
       const { body: material } = req;
@@ -77,6 +85,7 @@ function materialsApi(app) {
 
   router.put(
     '/:materialId',
+    passport.authenticate('jwt', { session: false }),
     validationHandler({ materialId: materialIdSchema }, 'params'),
     validationHandler(updateMaterialSchema),
     async function (req, res, next) {
@@ -101,6 +110,7 @@ function materialsApi(app) {
 
   router.delete(
     '/:materialId',
+    passport.authenticate('jwt', { session: false }),
     validationHandler({ materialId: materialIdSchema }, 'params'),
     async function (req, res, next) {
       const { materialId } = req.params;
