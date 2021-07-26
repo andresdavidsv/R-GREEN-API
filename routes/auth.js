@@ -70,10 +70,18 @@ function authApi(app) {
   router.post('/sign-up', validationHandler(createUserSchema), async function (req, res, next) {
     const { body: user } = req;
     try {
-      const userExists = await usersService.getUser(user);
-      if (userExists) {
+      const userEmailExists = await usersService.getUser(user);
+      if (userEmailExists) {
         res.send({
-          data: userExists.email,
+          data: userEmailExists.email,
+          message: 'user already exists'
+        })
+        return;
+      }
+      const userNameExists = await usersService.getUserName(user);
+      if (userNameExists) {
+        res.send({
+          data: userNameExists.user_name,
           message: 'user already exists'
         })
         return;

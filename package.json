@@ -11,7 +11,7 @@
     "prepare": "husky install"
   },
   "keywords": [],
-  "author": "",
+  "author": "Andres David Solarte Vidal",
   "license": "ISC",
   "dependencies": {
     "@hapi/boom": "^9.1.2",
