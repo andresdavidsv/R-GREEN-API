@@ -42,6 +42,17 @@ class UsersService {
     const deleteUserId = await this.mongoDB.delete(this.collection, userId);
     return deleteUserId;
   }
+
+  async getOrCreateUser({ user }) {
+    const queriedUser = await this.getUser({ email: user.email });
+
+    if (queriedUser) {
+      return queriedUser;
+    }
+
+    await this.createUser({ user });
+    return await this.getUser({ email: user.email });
+  }
 }
 
 module.exports = UsersService;
