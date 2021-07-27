@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require('helmet')
 const { ApolloServer } = require('apollo-server');
 
 const typeDefs = require('./db/schema');
@@ -29,6 +30,7 @@ const notFoundHandler = require('./utils/middleware/notFoundHandler');
 // body parser
 app.use(express.json())
 app.use(corsHandler());
+app.use(helmet());
 
 //routes
 authApi(app);

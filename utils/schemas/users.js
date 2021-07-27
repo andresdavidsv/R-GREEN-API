@@ -7,15 +7,24 @@ const userUserNameSchema = joi.string().min(3).max(10);
 const userEmailSchema = joi.string().email();
 const userPasswordSchema = joi.string().regex(/^[a-zA-Z0-9]{3,30}$/);
 const userAdminSchema = joi.boolean().default(false);
+const userApiKeyTokenSchema = joi.string();
 
-const createUserSchema = {
+const userSchema = {
   first_name: userFirstNameSchema.required(),
   last_name: userLastNameSchema.required(),
   user_name: userUserNameSchema.required(),
   email: userEmailSchema.required(),
   password: userPasswordSchema.required(),
+};
+const createUserSchema = {
+  ...userSchema,
   isAdmin: userAdminSchema
 };
+
+const createProviderUserSchema = {
+  ...userSchema,
+  apiKeyToken: userApiKeyTokenSchema.required(),
+}
 
 const updateUserSchema = {
   first_name: userFirstNameSchema,
@@ -29,4 +38,5 @@ module.exports = {
   userIdSchema,
   createUserSchema,
   updateUserSchema,
+  createProviderUserSchema
 };
