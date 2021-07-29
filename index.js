@@ -52,7 +52,7 @@ app.listen(config.dbPort, function () {
   debug(`Listening http://localhost:${config.dbPort}`);
 });
 
-server.listen().then(({ url }) => {
+server.listen({ port: config.dbPortGql }).then(({ url }) => {
   const debug = require('debug')('app:server');
   debug(`Apollo listening ${url}`);
 })
