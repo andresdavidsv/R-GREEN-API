@@ -41,19 +41,19 @@ const resolvers = {
       const isValidEmail = emailExpression.test(String(email).toLowerCase())
 
       if (!isValidEmail)
-        throw new Error("email not in proper format")
+        throw new Error("Email not in proper format")
 
       if (first_name.length > 15 || first_name.length < 5)
-        throw new Error("firstName should less than 15 characters and more than 5 characters")
+        throw new Error("First Name should less than 15 characters and more than 5 characters")
 
       if (last_name.length > 15 || last_name.length < 5)
-        throw new Error("lastName should less than 15 characters and more than 1 characters")
+        throw new Error("Last Name should less than 15 characters and more than 5 characters")
 
       if (user_name.length > 10 || user_name.length < 3)
-        throw new Error("userName should less than 15 characters and more than 3 characters")
+        throw new Error("User Name should less than 15 characters and more than 3 characters")
 
       if (password.length > 30 || password.length < 3)
-        throw new Error("password should less than 30 characters and more than 3 characters")
+        throw new Error("Password should less than 30 characters and more than 3 characters")
 
       const userExists = await usersService.getUser(user);
       const userNameExists = await usersService.getUserName(user);
@@ -61,9 +61,9 @@ const resolvers = {
       if (userExists || userNameExists)
         throw new Error('user already exists.')
 
-      const createdUserId = await usersService.createUser({ user });
+      await usersService.createUser({ user });
 
-      return (`user created ${createdUserId}`);
+      return (`User created - ${user_name} `);
     },
     authenticateUser: async (_, { user }) => {
 
