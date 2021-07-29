@@ -71,9 +71,10 @@ function authApi(app) {
     const { body: user } = req;
     try {
       const userExists = await usersService.getUser(user);
-      if (userExists) {
+      const userNameExists = await usersService.getUserName(user);
+      if (userExists || userNameExists) {
         res.send({
-          data: userExists.email,
+          data: (userExists ? userExists.email : userNameExists.user_name),
           message: 'user already exists'
         })
         return;
@@ -92,7 +93,7 @@ function authApi(app) {
   router.post(
     '/sign-provider',
     validationHandler(createProviderUserSchema),
-    async function(req, res, next) {
+    async function (req, res, next) {
       const { body } = req;
 
       const { apiKeyToken, ...user } = body;
