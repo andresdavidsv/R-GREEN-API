@@ -8,7 +8,8 @@
     "debug": "DEBUG=express:*,app:* npm run start",
     "inspect": "DEBUG=express:*,app:* nodemon --inspect index",
     "start": "NODE_ENV=production node index",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build": "r-green-api build --output public"
   },
   "keywords": [],
   "author": "",

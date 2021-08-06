@@ -1,13 +1,13 @@
 const express = require('express');
 const helmet = require('helmet')
-// const { ApolloServer } = require('apollo-server');
+const { ApolloServer } = require('apollo-server');
 
-// const typeDefs = require('./db/schema');
-// const resolvers = require('./db/resolvers');
+const typeDefs = require('./db/schema');
+const resolvers = require('./db/resolvers');
 
 //Servers
 const app = express();
-// const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ typeDefs, resolvers });
 
 const { config } = require('./config/index');
 
@@ -52,7 +52,7 @@ app.listen(config.dbPort, function () {
   debug(`Listening http://localhost:${config.dbPort}`);
 });
 
-// server.listen({ port: config.dbPortGql }).then(({ url }) => {
-//   const debug = require('debug')('app:server');
-//   debug(`Apollo listening ${url}`);
-// })
+server.listen({ port: config.dbPortGql }).then(({ url }) => {
+  const debug = require('debug')('app:server');
+  debug(`Apollo listening ${url}`);
+})
