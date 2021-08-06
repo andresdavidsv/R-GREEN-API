@@ -9,7 +9,7 @@
     "inspect": "DEBUG=express:*,app:* nodemon --inspect index",
     "start": "NODE_ENV=production node index",
     "prepare": "husky install",
-    "build": "rgreenapi build --output public"
+    "build": "r-green-api build --output public"
   },
   "keywords": [],
   "author": "",
