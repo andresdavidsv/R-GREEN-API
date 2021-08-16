@@ -62,10 +62,10 @@ function usersMaterialsApi(app) {
       const { userMaterialId } = req.params;
 
       try {
-        const userMaterils = await userMaterialsService.getMaterial({ userMaterialId });
+        const userMaterials = await userMaterialsService.getMaterial({ userMaterialId });
 
         res.status(200).json({
-          data: userMaterils,
+          data: userMaterials,
           message: 'user material retrieved',
         });
       } catch (err) {
