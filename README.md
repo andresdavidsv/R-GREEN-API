@@ -192,7 +192,7 @@ DELETE USER'S MATERIAL http://localhost:3001/api/v1/user-materials/:id
 
 URL => https://r-green-api.vercel.app/
 
-## Step to Deplou
+## Step to Deploy
 
   1. Before deploying we can test the app with ``` vercel dev ```
   2. If all goes well, we do the deployment: ``` vercel ```

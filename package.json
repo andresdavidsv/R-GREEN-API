@@ -4,12 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "DEBUG=express:*,app:* nodemon index",
+    "dev": "nodemon index",
     "debug": "DEBUG=express:*,app:* npm run start",
     "inspect": "DEBUG=express:*,app:* nodemon --inspect index",
     "start": "NODE_ENV=production node index",
-    "prepare": "husky install",
-    "build": "r-green-api build --output public"
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -28,7 +27,8 @@
     "mongodb": "^3.6.10",
     "passport": "^0.4.1",
     "passport-http": "^0.3.0",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "ts-tiny-invariant": "^0.0.3"
   },
   "devDependencies": {
     "chalk": "^4.1.1",

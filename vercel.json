@@ -17,6 +17,7 @@
     "DB_USER": "@r-green-db-user",
     "DB_PASSWORD": "@r-green-db-password",
     "DB_HOST": "@r-green-db-host",
-    "DB_NAME": "@r-green-db-name"
+    "DB_NAME": "@r-green-db-name",
+    "AUTH_JWT_SECRET": "@r-green-db-jwt"
   }
 }
