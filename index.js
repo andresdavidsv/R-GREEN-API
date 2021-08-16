@@ -1,15 +1,30 @@
 const express = require('express');
 const helmet = require('helmet')
 const { ApolloServer } = require('apollo-server');
+const jwt = require('jsonwebtoken');
+
+const { config } = require('./config');
 
 const typeDefs = require('./db/schema');
 const resolvers = require('./db/resolvers');
 
 //Servers
 const app = express();
-const server = new ApolloServer({ typeDefs, resolvers });
-
-const { config } = require('./config/index');
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({req}) => {
+    const token = req.headers['authorization'] || '';
+    if (token) {
+      try {
+        const user = jwt.verify(token, config.authJwtSecret)
+        return user;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+});
 
 const authApi = require('./routes/auth');
 const usersApi = require('./routes/users');

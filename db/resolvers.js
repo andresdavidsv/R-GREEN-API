@@ -1,11 +1,16 @@
 const bcrypt = require('bcrypt');
 const UserService = require('../services/users');
+const MaterialsService = require('../services/materials');
+const UserMaterialsService = require('../services/userMaterials');
 const jwt = require('jsonwebtoken');
 const ApiKeysService = require('../services/apiKeys');
 
 const { config } = require('../config');
+const { ObjectId } = require('mongodb');
 
 const usersService = new UserService();
+const materialsService = new MaterialsService();
+const userMaterialsService = new UserMaterialsService();
 const apiKeysService = new ApiKeysService();
 
 const createToekn = (user, apiKey) => {
@@ -28,7 +33,11 @@ const createToekn = (user, apiKey) => {
 
 const resolvers = {
   Query: {
-
+    getUserMaterials: async (_, {}, ctx ) => {
+      const { sub } = ctx;
+      const userMaterials = await userMaterialsService.getUserMaterials({ userId: sub });
+      return userMaterials;
+    }
   },
   Mutation: {
     createUser: async (_, { user }) => {
@@ -95,7 +104,54 @@ const resolvers = {
       return {
         token: createToekn(userExists, apiKey),
       };
+    },
+    newMaterial: async (_, { material }, ctx) => {
+      const { sub } = ctx;
+      const createdMaterialId = await materialsService.createMaterial({ material });
+      const userMaterial = {
+        "userId": sub,
+        "materialId": ObjectId(createdMaterialId).toString(),
+      }
+      await userMaterialsService.createUserMaterial({ userMaterial });
+
+      return (`Material created`);
+    },
+    updateMaterial: async (_, { userMaterialId, material }, ctx) => {
+      const { sub } = ctx;
+      const userMaterials = await userMaterialsService.getMaterial({ userMaterialId });
+      if (!userMaterials) {
+        throw new Error('Material not found');
+      }
+
+      if (userMaterials.userId.toString() !== sub) {
+        throw new Error('User not have permissions');
+      }
+      await materialsService.updateMaterial({
+        materialId: userMaterials.materialId,
+        material,
+      });
+
+      return (`Material updated`);
+    },
+    deleteMaterial: async (_, { userMaterialId }, ctx) => {
+      const { sub } = ctx;
+      const userMaterials = await userMaterialsService.getMaterial({ userMaterialId });
+      if (!userMaterials) {
+        throw new Error('Material not found');
+      }
+
+      if (userMaterials.userId.toString() !== sub) {
+        throw new Error('User not have permissions');
+      }
+      await materialsService.deleteMaterial({
+        materialId: userMaterials.materialId,
+      });
+
+      await userMaterialsService.deleteUserMaterial({ userMaterialId });
+
+      return (`Material deleted`);
     }
+
   }
 };
 
