@@ -27,7 +27,7 @@ const createToekn = (user, apiKey) => {
   };
 
   return jwt.sign(payload, config.authJwtSecret, {
-    expiresIn: '15m'
+    expiresIn: '2hr'
   });
 }
 
