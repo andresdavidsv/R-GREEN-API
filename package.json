@@ -7,7 +7,7 @@
     "dev": "DEBUG=express:*,app:*  nodemon index",
     "debug": "DEBUG=express:*,app:* npm run start",
     "inspect": "DEBUG=express:*,app:* nodemon --inspect index",
-    "start": "node index ",
+    "start": "NODE_ENV=production node index",
     "prepare": "husky install"
   },
   "keywords": [],
