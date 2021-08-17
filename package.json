@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index",
+    "dev": "DEBUG=express:*,app:*  nodemon index",
     "debug": "DEBUG=express:*,app:* npm run start",
     "inspect": "DEBUG=express:*,app:* nodemon --inspect index",
     "start": "NODE_ENV=production node index",
